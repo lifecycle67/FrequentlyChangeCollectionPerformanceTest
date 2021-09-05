@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Timers;
 
 namespace ShareLib
@@ -9,18 +10,20 @@ namespace ShareLib
     public class MessagePump
     {
         private Int64 _sequence = 0;
-        private Timer _pumpingTimer;
+        private HighPrecisionTimer _highPrecisionTimer;
+        private int _interval;
+
+        //private System.Threading.Timer _timer;
 
         public event EventHandler<MessagePumpEventArgs> Pumped;
+        //public ConcurrentQueue<MessagePumpEventArgs> PumpedMessages { get; set; }
 
         public MessagePump(int messagePerSec)
         {
-            var interval = 1000 / messagePerSec;
-            _pumpingTimer = new Timer(interval);
-            _pumpingTimer.Elapsed += _pumpingTimer_Elapsed;
+            _interval = 1000 / messagePerSec;
         }
 
-        private void _pumpingTimer_Elapsed(object sender, ElapsedEventArgs e)
+        private void _highPrecisionTimer_Tick(object sender, HighPrecisionTimer.TickEventArgs e)
         {
             InboundMessage message = new InboundMessage();
             message.Sequence = _sequence++;
@@ -32,12 +35,13 @@ namespace ShareLib
 
         public void Start()
         {
-            _pumpingTimer.Start();
+            _highPrecisionTimer = new HighPrecisionTimer(_interval);
+            _highPrecisionTimer.Tick += _highPrecisionTimer_Tick;
         }
 
         public void Stop()
         {
-            _pumpingTimer.Stop();
+            _highPrecisionTimer.Dispose();
         }
     }
 }
