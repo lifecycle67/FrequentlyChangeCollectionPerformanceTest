@@ -25,6 +25,7 @@ namespace UwpFrequentlyChangeCollectionPerformanceTest
         public MainPage()
         {
             this.InitializeComponent();
+            DataContext = new MainPageVm();
         }
     }
 }
