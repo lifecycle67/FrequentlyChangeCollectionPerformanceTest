@@ -13,15 +13,17 @@ namespace ShareLib.Tests
     public class MessagePumpTests
     {
         /// <summary>
-        /// 1초에 50개의 메세지를 발생시키는지 여부를 확인합니다
+        /// 1초에 50개의 메세지를 발생시킬 수 있는지 확인합니다
         /// </summary>
         [TestMethod()]
         public void IncomeMessageFiftyPerSecTest()
         {
+            int messagePerSec = 50;
+
             Stopwatch sw = new Stopwatch();
             ConcurrentQueue<InboundMessage> messageQueue = new ConcurrentQueue<InboundMessage>();
 
-            MessagePump messagePump = new MessagePump(50);
+            MessagePump messagePump = new MessagePump(messagePerSec);
            
             sw.Start();
             messagePump.Start();
@@ -33,7 +35,7 @@ namespace ShareLib.Tests
 
             while (true)
             {
-                if (messageQueue.Count >= 50)
+                if (messageQueue.Count >= messagePerSec)
                 {
                     sw.Stop();
                     messagePump.Stop();
