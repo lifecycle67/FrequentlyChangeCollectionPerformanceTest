@@ -85,6 +85,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainWindowVm.cs" />
     <Compile Include="CollectionViewMessageBox.cs" />
     <Compile Include="DispatcherMessageBox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
