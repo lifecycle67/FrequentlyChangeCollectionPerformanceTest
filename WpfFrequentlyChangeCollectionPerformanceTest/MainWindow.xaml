@@ -41,7 +41,7 @@
                             <TextBlock Text="{Binding ElapsedTime}"/>
                             <TextBlock Text="ms" Margin="5,0,0,0"/>
                         </StackPanel>
-                        <ListBox Grid.Row="1" ItemsSource="{Binding InboundMessages}" Width="270">
+                        <ListBox Grid.Row="1" ItemsSource="{Binding InboundMessages}" Width="270" VirtualizingPanel.VirtualizationMode="Recycling">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Border BorderBrush="Black" BorderThickness="1,1,1,1" Opacity="0.5">
