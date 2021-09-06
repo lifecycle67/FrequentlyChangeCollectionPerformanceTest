@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31521.260
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UwpFrequentlyChangeCollectionPerformanceTest", "UwpFrequentlyChangeCollectionPerformanceTest\UwpFrequentlyChangeCollectionPerformanceTest.csproj", "{16A8DD75-8F3A-401A-B1D9-1B85D70A4AA1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UwpCollectionChangedPerformanceTest", "UwpFrequentlyChangeCollectionPerformanceTest\UwpCollectionChangedPerformanceTest.csproj", "{16A8DD75-8F3A-401A-B1D9-1B85D70A4AA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfFrequentlyChangeCollectionPerformanceTest", "WpfFrequentlyChangeCollectionPerformanceTest\WpfFrequentlyChangeCollectionPerformanceTest.csproj", "{BFCD0D3D-BBBA-4C70-AD0B-56C35AC28703}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfCollectionChangedPerformanceTest", "WpfFrequentlyChangeCollectionPerformanceTest\WpfCollectionChangedPerformanceTest.csproj", "{BFCD0D3D-BBBA-4C70-AD0B-56C35AC28703}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShareLib", "ShareLib\ShareLib.csproj", "{E698C774-1D0D-4D61-BEC9-AF9B40A0EE4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShareLib", "ShareLib\ShareLib.csproj", "{E698C774-1D0D-4D61-BEC9-AF9B40A0EE4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShareLibTests", "ShareLibTests\ShareLibTests.csproj", "{9DA45214-4788-43D4-8966-9AD0C13DC01B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShareLibTests", "ShareLibTests\ShareLibTests.csproj", "{9DA45214-4788-43D4-8966-9AD0C13DC01B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
