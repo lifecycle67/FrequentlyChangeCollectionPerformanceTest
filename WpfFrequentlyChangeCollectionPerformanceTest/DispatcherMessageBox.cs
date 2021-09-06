@@ -81,22 +81,19 @@ namespace WpfFrequentlyChangeCollectionPerformanceTest
 
         private void MessagePump_Pumped(object sender, MessagePumpEventArgs e)
         {
-            lock (_lock)
-            {
-                if (_useInvoke)
-                    App.Current.Dispatcher.Invoke(
-                        () => _inboundMessages.Insert(0, e.Message),
-                        _dispatcherPriority);
-                else
-                    App.Current.Dispatcher.BeginInvoke(
-                        new Action(() => _inboundMessages.Insert(0, e.Message)),
-                        _dispatcherPriority);
+            if (_useInvoke)
+                App.Current.Dispatcher.Invoke(
+                    () => _inboundMessages.Insert(0, e.Message),
+                    _dispatcherPriority);
+            else
+                App.Current.Dispatcher.BeginInvoke(
+                    new Action(() => _inboundMessages.Insert(0, e.Message)),
+                    _dispatcherPriority);
 
-                _incomeCount++;
+            _incomeCount++;
 
-                if (_incomeCount >= 1000)
-                    Stop();
-            }
+            if (_incomeCount >= 1000)
+                Stop();
         }
 
         private void InboundMessages_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -106,25 +103,22 @@ namespace WpfFrequentlyChangeCollectionPerformanceTest
 
         private void RemoveMessageTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            lock (_lock)
-            {
-                if (_useInvoke)
-                    App.Current.Dispatcher.Invoke(
-                        () =>
-                        {
-                            if (_inboundMessages.Count > 0)
-                                _inboundMessages.RemoveAt(_inboundMessages.Count - 1);
-                        },
-                        _dispatcherPriority);
-                else
-                    App.Current.Dispatcher.BeginInvoke(
-                        new Action(() =>
-                        {
-                            if (_inboundMessages.Count > 0)
-                                _inboundMessages.RemoveAt(_inboundMessages.Count - 1);
-                        }),
-                        _dispatcherPriority);
-            }
+            if (_useInvoke)
+                App.Current.Dispatcher.Invoke(
+                    () =>
+                    {
+                        if (_inboundMessages.Count > 0)
+                            _inboundMessages.RemoveAt(_inboundMessages.Count - 1);
+                    },
+                    _dispatcherPriority);
+            else
+                App.Current.Dispatcher.BeginInvoke(
+                    new Action(() =>
+                    {
+                        if (_inboundMessages.Count > 0)
+                            _inboundMessages.RemoveAt(_inboundMessages.Count - 1);
+                    }),
+                    _dispatcherPriority);
         }
     }
 }
