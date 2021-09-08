@@ -22,6 +22,7 @@ namespace WpfFrequentlyChangeCollectionPerformanceTest
     {
         private object _lock = new object();
         private int _incomeCount = 0;
+        private int _collectionChangedCount = 0;
         private DispatcherPriority _dispatcherPriority;
         private MessagePump _messagePump;
         private Timer _removeMessageTimer;
@@ -90,14 +91,16 @@ namespace WpfFrequentlyChangeCollectionPerformanceTest
                     new Action(() => _inboundMessages.Insert(0, e.Message)),
                     _dispatcherPriority);
 
-            _incomeCount++;
-
-            if (_incomeCount >= 1000)
-                Stop();
+            if (_incomeCount++ >= 1000)
+                _messagePump.Stop();
         }
 
         private void InboundMessages_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            if (e.Action == NotifyCollectionChangedAction.Add)
+                if (_collectionChangedCount++ >= 1000)
+                    Stop();
+
             ElapsedTime = _stopwatch.Elapsed.TotalMilliseconds.ToString();
         }
 

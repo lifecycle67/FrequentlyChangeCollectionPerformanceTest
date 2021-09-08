@@ -30,6 +30,7 @@ namespace WpfFrequentlyChangeCollectionPerformanceTest
         private System.Timers.Timer _removeMessageTimer;
         private Stopwatch _stopwatch;
         private int _incomeCount = 0;
+        private int _collectionChangedCount = 0;
 
         private ICollectionView _messageCollectionView;
 
@@ -88,6 +89,10 @@ namespace WpfFrequentlyChangeCollectionPerformanceTest
 
         private void InboundMessages_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            if (e.Action == NotifyCollectionChangedAction.Add)
+                if (++_collectionChangedCount >= 1000)
+                    Stop();
+
             ElapsedTime = _stopwatch.Elapsed.TotalMilliseconds.ToString();
         }
 
@@ -99,9 +104,7 @@ namespace WpfFrequentlyChangeCollectionPerformanceTest
                 _incomeCount++;
 
                 if (_incomeCount >= 1000)
-                {
-                    Stop();
-                }
+                    _messagePump.Stop();
             }
         }
 
