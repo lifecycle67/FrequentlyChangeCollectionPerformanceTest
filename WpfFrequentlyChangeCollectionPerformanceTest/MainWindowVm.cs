@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using ShareLib;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
