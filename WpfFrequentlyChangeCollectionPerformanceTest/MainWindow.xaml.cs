@@ -34,27 +34,17 @@ namespace WpfFrequentlyChangeCollectionPerformanceTest
             DataContext = new MainWindowVm();
 
             CompositionTarget.Rendering += CompositionTarget_Rendering;
+
+            new System.Threading.Timer((t) =>
+            {
+                App.Current.Dispatcher.Invoke(() => fps.Text = _frameCounter.ToString());
+                _frameCounter = 0;
+            }).Change(0, 1000);
         }
 
         private void CompositionTarget_Rendering(object sender, EventArgs e)
         {
-            if (_sw.IsRunning == false)
-                _sw.Start();
-
             _frameCounter++;
-
-            if (_sw.ElapsedMilliseconds <= 1000)
-                return;
-
-            long frameRate = (long)(_frameCounter / _sw.Elapsed.TotalMilliseconds * 1000);
-            if (frameRate > 0)
-                fps.Text = frameRate.ToString();
-
-            if (_sw.Elapsed.TotalSeconds >= 8)
-            {
-                _sw.Restart();
-                _frameCounter = 0;
-            }
         }
     }
 }

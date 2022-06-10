@@ -80,14 +80,14 @@ namespace WpfFrequentlyChangeCollectionPerformanceTest
             _stopwatch.Stop();
         }
 
-        private void MessagePump_Pumped(object sender, MessagePumpEventArgs e)
+        private async void MessagePump_Pumped(object sender, MessagePumpEventArgs e)
         {
             if (_useInvoke)
                 App.Current.Dispatcher.Invoke(
                     () => _inboundMessages.Insert(0, e.Message),
                     _dispatcherPriority);
             else
-                App.Current.Dispatcher.BeginInvoke(
+                await App.Current.Dispatcher.BeginInvoke(
                     new Action(() => _inboundMessages.Insert(0, e.Message)),
                     _dispatcherPriority);
 
