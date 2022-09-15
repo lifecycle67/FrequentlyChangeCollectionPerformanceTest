@@ -21,6 +21,7 @@
             <RadioButton Content="CollectionView" IsChecked="{Binding UseCollectionView}" Margin="10 0 0 0" VerticalAlignment="Center"/>
             <RadioButton Content="Dispatcher invoke" IsChecked="{Binding UseDispatcherInvoke}" Margin="10 0 0 0" VerticalAlignment="Center"/>
             <RadioButton Content="Dispatcher beginInvoke" IsChecked="{Binding UseDispatcherBeginInvoke}" Margin="10 0 0 0" VerticalAlignment="Center"/>
+            <RadioButton Content="ReactiveX" IsChecked="{Binding UseRx}" Margin="10 0 0 0" VerticalAlignment="Center"/>
             <ComboBox Margin="10 0 0 0" ItemsSource="{Binding DispatcherPriorities}" SelectedItem="{Binding SelectedDispatcherPriority}" VerticalAlignment="Center"/>
             <TextBlock x:Name="fps" Foreground="Red" HorizontalAlignment="Stretch" Margin="50,0,0,0"/>
         </StackPanel>

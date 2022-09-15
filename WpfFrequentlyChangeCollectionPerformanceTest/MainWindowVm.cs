@@ -35,6 +35,13 @@ namespace WpfFrequentlyChangeCollectionPerformanceTest
             set { Set(ref _useDispatcherBeginInvoke, value, nameof(UseDispatcherBeginInvoke)); }
         }
 
+        private bool _useRx;
+        public bool UseRx
+        {
+            get { return _useRx; }
+            set { Set(ref _useRx, value); }
+        }
+
         public IEnumerable<DispatcherPriority> DispatcherPriorities
         {
             get { return Enum.GetValues(typeof(DispatcherPriority)).Cast<DispatcherPriority>(); }
@@ -96,6 +103,8 @@ namespace WpfFrequentlyChangeCollectionPerformanceTest
                 FillDispatcherMessageBox(5, true, _selectedDispatcherPriority);
             else if (UseDispatcherBeginInvoke)
                 FillDispatcherMessageBox(5, false, _selectedDispatcherPriority);
+            else if (UseRx)
+                FillRxMessageBox(5);
 
             foreach (var messageBox in MessageBoxes)
             {
@@ -116,6 +125,14 @@ namespace WpfFrequentlyChangeCollectionPerformanceTest
             for (int i = 0; i < boxCount; i++)
             {
                 MessageBoxes.Add(new DispatcherMessageBox(50, useInvoke, selectedDispatcherPriority));
+            }
+        }
+
+        private void FillRxMessageBox(int boxCount)
+        {
+            for (int i = 0; i < boxCount; i++)
+            {
+                MessageBoxes.Add(new RxMessageBox(50));
             }
         }
     }
